@@ -32,6 +32,9 @@ themes\.googleusercontent\.com/static/fonts/[^/]+/v\d+/[^.]+.
 /[a-z-]+\.githubusercontent\.com/[-a-zA-Z0-9?&=_\/.]*
 # gist github
 /gist\.github\.com/[^/]+/[0-9a-f]+
+# github repos / issues / etc...
+/([a-z-]+\.)?github\.com/[-a-zA-Z0-9?&=_\/.]*
+
 
 # URL escaped characters
 \%[0-9A-F]{2}

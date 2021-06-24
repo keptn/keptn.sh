@@ -56,7 +56,70 @@ helm upgrade keptn keptn --install -n keptn --create-namespace --wait --version=
 
 ### Example: Execute Helm upgrade without Internet connectivity
 
-Offline/air-gapped installation is currently not supported. Please see https://github.com/keptn/keptn/issues/4183 and PR https://github.com/keptn/keptn.github.io/pull/848 for updates and intermediate instructions.
+The following section contains instructions for installing Keptn in an air-gapped / offline installation scenario.
+
+The following artifacts need to be available locally:
+
+* Keptn Helm Chart (control-plane + helm + jmeter)
+* Several Docker Images (e.g., pushed into a private registry)
+* Helper scripts
+* Keptn CLI (optional, but recommended for future use)
+
+**Download Keptn Helm Charts**
+
+Download the Helm charts from the [Keptn 0.8.4 release](https://github.com/keptn/keptn/releases/tag/0.8.4):
+
+* Keptn Control Plane: https://github.com/keptn/keptn/releases/download/0.8.4/keptn-0.8.4.tgz
+* helm-service (if needed): https://github.com/keptn/keptn/releases/download/0.8.4/helm-service-0.8.4.tgz
+* jmeter-service (if needed): https://github.com/keptn/keptn/releases/download/0.8.4/jmeter-service-0.8.4.tgz
+
+Move the helm charts to a directory on your local machine, e.g., `offline-keptn`.
+
+For convenience, the following script creates this directory and downloads the required helm charts into it:
+
+```console
+mkdir offline-keptn
+cd offline-keptn
+curl -L https://github.com/keptn/keptn/releases/download/0.8.4/keptn-0.8.4.tgz -o keptn-0.8.4.tgz
+curl -L https://github.com/keptn/keptn/releases/download/0.8.4/helm-service-0.8.4.tgz -o helm-service-0.8.4.tgz
+curl -L https://github.com/keptn/keptn/releases/download/0.8.4/jmeter-service-0.8.4.tgz -o jmeter-service-0.8.4.tgz
+cd ..
+```
+
+**Download Containers/Images**
+
+Within the Helm Charts several Docker Images are referenced (Keptn specific and some third party dependencies).
+We recommend to pulling, re-tagging and pushing those images to a local registry that the Kubernetes cluster can reach.
+
+We are providing a helper script for this in our Git repository: https://github.com/keptn/keptn/blob/master/installer/airgapped/pull_and_retag_images.sh
+
+For convenience, you can use the following commands to download and execute the script:
+
+```console
+cd offline-keptn
+curl -L https://raw.githubusercontent.com/keptn/keptn/master/installer/airgapped/pull_and_retag_images.sh -o pull_and_retag_images.sh
+chmod +x pull_and_retag_images.sh
+KEPTN_TAG=0.8.4 ./pull_and_retag_images.sh "your-registry.localhost:5000/"
+cd ..
+```
+
+Please mind the trailing slash for the registry url (e.g., `your-registry.localhost:5000/`).
+
+**Installation**
+
+Keptn's Helm chart allows you to specify the name of all images, which can be especially handy in air-gapped systems where you cannot access DockerHub for pulling the images.
+
+We are providing a helper script for this in our Git repository: https://github.com/keptn/keptn/blob/master/installer/airgapped/install_keptn.sh
+
+For convenience, you can use the following commands to download and execute the script:
+
+```console
+cd offline-keptn
+curl -L https://raw.githubusercontent.com/keptn/keptn/master/installer/airgapped/install_keptn.sh -o install_keptn.sh
+chmod +x install_keptn.sh
+./install_keptn.sh "your-registry.localhost:5000/" keptn-0.8.4.tgz helm-service-0.8.4.tgz jmeter-service-0.8.4.tgz
+cd ..
+```
 
 ### Install Keptn using a Root-Context
 
