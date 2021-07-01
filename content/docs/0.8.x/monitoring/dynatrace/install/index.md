@@ -41,7 +41,7 @@ Create a secret containing the credentials for the *Dynatrace tenant* and *Keptn
 
 * `DT_TENANT`
 * `DT_API_TOKEN`
-* `KEPTN_API_URL` 
+* `KEPTN_API_URL`
 * `KEPTN_API_TOKEN`
 * `KEPTN_BRIDGE_URL` (is optional)
 
@@ -67,7 +67,7 @@ Create a secret containing the credentials for the *Dynatrace tenant* and *Keptn
     width="500px">}}
 
 * To get the values for `KEPTN_API_URL` (aka. `KEPTN_ENDPOINT`) and `KEPTN_API_TOKEN`, please see [Authenticate Keptn CLI](../../../operate/install/#authenticate-keptn-cli).
-   
+
 * If you would like to use backlinks from your Dynatrace tenant to the Keptn Bridge, you can add the `KEPTN_BRIDGE_URL` to the secret. The value of this setting is: `<KEPTN_API_URL>/bridge`
 
 * If running on a Unix/Linux based system, you can use environment variables to set the values of the credentials. (It is also fine to just replace the values in the `kubectl` command below.)
@@ -90,7 +90,7 @@ Create a secret containing the credentials for the *Dynatrace tenant* and *Keptn
 
 The Dynatrace integration into Keptn is handled by the *dynatrace-service*.
 
-* Specify the version of the dynatrace-service you want to deploy. Please see the [compatibility matrix](https://github.com/keptn-contrib/dynatrace-service#compatibility-matrix) of the dynatrace-service to pick the version that works with your Keptn.  
+* Specify the version of the dynatrace-service you want to deploy. Please see the [compatibility matrix](https://github.com/keptn-contrib/dynatrace-service#compatibility-matrix) of the dynatrace-service to pick the version that works with your Keptn.
 
     ```console
     VERSION=<VERSION>   # e.g.: VERSION=0.12.0
@@ -101,7 +101,7 @@ The Dynatrace integration into Keptn is handled by the *dynatrace-service*.
     ```console
     kubectl apply -f https://raw.githubusercontent.com/keptn-contrib/dynatrace-service/$VERSION/deploy/service.yaml -n keptn
     ```
-   
+
 * This installs the `dynatrace-service` in the `keptn` namespace, which you can verify using:
 
     ```console
@@ -118,7 +118,7 @@ When you execute the [keptn configure monitoring](../../../reference/cli/command
     - keptn_project
     - keptn_service
     - keptn_stage
-  
+
     This means that Dynatrace will automatically apply tags to your onboarded services.
 
 - *Problem notification:* A problem notification has been set up to inform Keptn of any problems with your services to allow auto-remediation. You can check the problem notification by navigating to **Settings > Integration > Problem notifications** and you will find a **keptn remediation** problem notification.
@@ -135,7 +135,7 @@ When you execute the [keptn configure monitoring](../../../reference/cli/command
 keptn configure monitoring dynatrace --project=PROJECTNAME
 ```
 
-**Note 2:** To monitor the services that are already onboarded in the **dev**, **staging**, and **production** namespace, make sure to restart the pods. If you defined different environments in your shipyard, please adjust the parameters accordingly. 
+**Note 2:** To monitor the services that are already onboarded in the **dev**, **staging**, and **production** namespace, make sure to restart the pods. If you defined different environments in your shipyard, please adjust the parameters accordingly.
 
 ```console
 kubectl delete pods --all --namespace=sockshop-dev
@@ -162,7 +162,7 @@ oneagent-k7jn6                                 0/1     CrashLoopBackOff   6     
         - name: ONEAGENT_ENABLE_VOLUME_STORAGE
           value: "true"
 
-1. To edit the OneAgent custom resource: 
+1. To edit the OneAgent custom resource:
 
     ```console
     kubectl edit oneagent -n dynatrace
