@@ -61,6 +61,14 @@ On the project settings page, you can update your project.
 link="./assets/settings.png"
 caption="Project settings">}}
 
+## Delete your project
+On the project settings page, you can delete your project. Please be careful when using this feature, as the project will be removed 
+permanently from your Keptn installation and cannot be restored.
+
+{{< popup_image
+link="./assets/delete-project.png"
+caption="Delete project">}}
+
 ### Update the Git upstream settings
 The git upstream can be updated by providing the Git repository URL, Git username and the Git token. This can also be achieved by
 using the [keptn update project](https://keptn.sh/docs/0.8.x/reference/cli/commands/keptn_update_project/) command.
